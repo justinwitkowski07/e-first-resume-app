@@ -1,0 +1,48 @@
+{
+  "name": "Jose Carrasco Martin",
+  "email": "jcmdesign2023@gmail.com",
+  "phone": "",
+  "location": "Barcelona, Catalonia, Spain",
+  "linkedin": "https://www.linkedin.com/in/jose-carrasco-martin-62aa67392/",
+  "website": "",
+  
+  "experience": [
+    {
+      "company": "Kiggla",
+      "title": "Senior Full Stack Engineer",
+      "location": "Florida, US",
+      "start_date": "May 2025",
+      "end_date": "Nov 2025"
+    },
+    {
+      "company": "Corva",
+      "title": "Full Stack Developer",
+      "location": "Houston, Texas, USA",
+      "start_date": "Jun 2021",
+      "end_date": "Mar 2025"
+    },
+    {
+      "company": "Marfeel",
+      "title": "Full Stack Developer",
+      "location": "Barcelona, Spain",
+      "start_date": "Sep 2020",
+      "end_date": "Apr 2021"
+    },
+    {
+      "company": "STP Group",
+      "title": "Junior Developer",
+      "location": "Barcelona, Spain",
+      "start_date": "Nov 2017",
+      "end_date": "Jul 2020"
+    }
+  ],
+  
+  "education": [
+    {
+      "degree": "Bachelor’s Degree in Computer Science",
+      "school": "University of Barcelona",
+      "start_year": "2013",
+      "end_year": "2017"
+    }
+  ]
+}
