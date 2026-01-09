@@ -7,6 +7,13 @@
   "website": "",
   
   "experience": [
+     {
+      "company": "Bluetab, an IBM Company",
+      "title": "Desarrollador de back-end",
+      "location": "",
+      "start_date": "Oct 2025",
+      "end_date": "Present"
+    },
     {
       "company": "lquadrat",
       "title": "Programador Full stack",
@@ -38,4 +45,5 @@
       "end_year": ""
     }
   ]
+
 }
