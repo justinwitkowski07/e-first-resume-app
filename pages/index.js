@@ -163,11 +163,8 @@ export default function Home() {
         // Try to parse as JSON to get detailed error
         try {
           const errorJson = JSON.parse(errorText);
-          if (errorJson.locationType === 'hybrid') {
-            alert("⚠️ HYBRID POSITION DETECTED\n\nThis job requires some office days. This tool is designed for REMOTE-ONLY positions.\n\nPlease provide a fully remote job description.");
-            setDisable(false);
-            return;
-          } else if (errorJson.locationType === 'onsite') {
+          // Hybrid is allowed now (server returns PDF with a warning header). Only block onsite/entry-level.
+          if (errorJson.locationType === 'onsite') {
             alert("⚠️ ONSITE/IN-PERSON POSITION DETECTED\n\nThis job is not remote. This tool is designed for REMOTE-ONLY positions.\n\nPlease provide a fully remote job description.");
             setDisable(false);
             return;
@@ -181,6 +178,16 @@ export default function Home() {
         } catch (e) {
           throw new Error(errorText || "Failed to generate PDF");
         }
+      }
+
+      // If server flagged hybrid via header, warn the user but continue with download
+      try {
+        const locationType = genRes.headers.get('x-location-type');
+        if (locationType === 'hybrid') {
+          alert("⚠️ HYBRID POSITION DETECTED\n\nThis job requires some office days. The resume will still be generated.");
+        }
+      } catch (h) {
+        // ignore header access errors
       }
 
       const blob = await genRes.blob();

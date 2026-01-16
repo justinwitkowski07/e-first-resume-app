@@ -262,6 +262,8 @@ export default async function handler(req, res) {
     
     // Check for hybrid indicators
     const isHybrid = hybridKeywords.some(keyword => jdLower.includes(keyword));
+    // Track if hybrid was detected so we can warn but continue
+    let hybridDetected = false;
     
     // Check for onsite indicators (but exclude if "remote" is also mentioned strongly)
     const hasOnsiteKeywords = onsiteKeywords.some(keyword => jdLower.includes(keyword));
@@ -281,11 +283,9 @@ export default async function handler(req, res) {
     const isOnsite = hasOnsiteKeywords && !hasRemoteKeywords;
     
     if (isHybrid) {
-      console.log("❌ Job is HYBRID - Rejecting");
-      return res.status(400).json({ 
-        error: "This position is HYBRID (requires some office days). This tool is designed for REMOTE-ONLY positions. Please provide a fully remote job description.",
-        locationType: "hybrid"
-      });
+      // For hybrid positions we only warn and continue generation (client will show a warning).
+      console.log("⚠️ Job is HYBRID - Continuing with warning");
+      hybridDetected = true;
     }
     
     if (isOnsite) {
@@ -638,6 +638,16 @@ ${jd}
     const sanitizeFilename = (str) => str.replace(/[^a-z0-9]/gi, '_').replace(/_+/g, '_').replace(/^_|_$/g, '');
     const filename = `${sanitizeFilename(profileData.name)}_${sanitizeFilename(company)}_${sanitizeFilename(role)}.pdf`;
     
+    // If hybrid was detected earlier, add a response header so the client can warn the user.
+    try {
+      if (typeof hybridDetected !== 'undefined' && hybridDetected) {
+        res.setHeader('X-Location-Type', 'hybrid');
+        res.setHeader('X-Location-Warning', 'Job detected as HYBRID (requires some office days).');
+      }
+    } catch (e) {
+      // ignore header set errors
+    }
+
     res.setHeader("Content-Type", "application/pdf");
     res.setHeader("Content-Disposition", `attachment; filename="${filename}"`);
     res.end(pdfBuffer);
