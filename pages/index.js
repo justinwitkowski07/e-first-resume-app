@@ -99,7 +99,8 @@ const footerStyle = {
 
 export default function Home() {
   const [profiles, setProfiles] = useState([]);
-  const [selectedProfile, setSelectedProfile] = useState("");
+  // Lock selected profile to Christian_Carrasco
+  const [selectedProfile, setSelectedProfile] = useState("Christian_Carrasco");
   const [company, setCompany] = useState("");
   const [role, setRole] = useState("");
   const [jd, setJd] = useState("");
@@ -231,13 +232,16 @@ export default function Home() {
             value={selectedProfile}
             onChange={handleProfileChange}
             style={selectStyle}
+            disabled
           >
-            <option value="">-- Select a profile --</option>
-            {profiles.map(profile => (
-              <option key={profile.id} value={profile.id}>
-                {profile.name}
-              </option>
-            ))}
+            {/* Fixed to Christian only */}
+            {profiles
+              .filter(p => p.id === "Christian_Carrasco")
+              .map(profile => (
+                <option key={profile.id} value={profile.id}>
+                  {profile.name}
+                </option>
+              ))}
           </select>
         </div>
 
