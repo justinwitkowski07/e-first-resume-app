@@ -17,7 +17,7 @@
     {
       "company": "Cargo Express Freight",
       "title": "Full Stack Developer",
-      "location": "Houston, Texas, USA",
+      "location": "CA, US",
       "start_date": "Jun 2021",
       "end_date": "Mar 2025"
     },
@@ -45,4 +45,5 @@
       "end_year": "2017"
     }
   ]
+
 }
