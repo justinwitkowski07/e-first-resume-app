@@ -8,6 +8,13 @@
   
   "experience": [
     {
+      "company": "BlueTap",
+      "title": "Backend Engineer",
+      "location": "",
+      "start_date": "Oct 2025",
+      "end_date": "Present"
+    },
+    {
       "company": "lquadrat",
       "title": "Programador Full stack",
       "location": "",
